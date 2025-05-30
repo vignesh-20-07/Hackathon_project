@@ -14,6 +14,16 @@ class FreeListing {
     verifyUrl() {
       cy.url().should('include', 'Free-Listing');
     }
+
+    enterPhoneNumber(phoneNumber) {
+        cy.get('#1').clear().type(`${phoneNumber}{enter}`);
+    }
+
+    verifyErrorMessage() {
+        cy.get('.entermobilenumber_error__text__uPM09').should('be.visible').then(($el) => {
+            cy.log('Error Message:', $el.text());
+        });
+    }
 }
 
 export default new FreeListing();
