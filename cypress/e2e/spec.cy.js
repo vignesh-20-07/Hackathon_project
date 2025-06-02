@@ -70,7 +70,6 @@ describe('Free Listing Registration', () => {
     //   freeListing.enterPhoneNumber(data.invalidPhoneNumbers);
     //   freeListing.verifyErrorMessage();
     // });
-
   });
 
   it('Register with invalid phone number', () => {
@@ -85,14 +84,6 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Input Box Visibility', function () {
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-    freeListing.clickFreeListing();
-    freeListing.inputboxVisible();
-
-  });
-  
   it('Register with empty phone number field', function () {
     cy.get('@testData').then((data) => {
       freeListing.visit();
@@ -102,6 +93,25 @@ describe('Free Listing Registration', () => {
       freeListing.enterPhoneNumber(data.invalidPhone2);
       freeListing.verifyErrorMessage();
     });
+  });
+
+  it('Register with phone number less than 10 digits', () => {
+    cy.get('@testData').then((data) => {
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
+
+      freeListing.enterPhoneNumber(data.invalidPhone3);
+      freeListing.verifyErrorMessage();
+    });
+  });
+
+  it('Input Box Visibility', function () {
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+
+    freeListing.clickFreeListing();
+    freeListing.inputboxVisible();
   });
   
 
@@ -114,7 +124,7 @@ describe('Free Listing Registration', () => {
     });
    
     freeListing.verifyOtpModalAppears();
-   })
-
+  });
+  
 });
-
+ 

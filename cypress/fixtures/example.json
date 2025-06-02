@@ -1,8 +1,7 @@
 {
-  
-  "invalidPhone2": "", 
-  "invalidPhoneNumbers": ["3452748992", "", "9856748"],
   "phonenumber" : "9789395595",  
   "invalidPhone1": "3452748992",
+  "invalidPhone2": "", 
+  "invalidPhone3": "9856748",
   "location" : "Chil Sez"
 }
