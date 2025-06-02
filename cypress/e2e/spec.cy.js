@@ -83,6 +83,7 @@ describe('Free Listing Registration', () => {
       freeListing.visit();
       freeListing.clickMaybeLater();
       freeListing.clickFreeListing();
+      
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
       
