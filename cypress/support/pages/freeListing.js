@@ -31,13 +31,9 @@ class FreeListing {
       .should('be.visible')          
   }
 
-  enterPhoneNumber(phone) {
-    cy.get('input[name="pincode"]').eq(0)
-      .clear()
-      .type(phone)
-      .type('{enter}')
-      .wait(10000)
-  }
+  enterPhoneNumber(phoneNumber) {
+    cy.get('#1').clear().type(`${phoneNumber}{enter}`);
+}
 
   verifyErrorMessage() {
     cy.get('.entermobilenumber_error__text__uPM09').should('be.visible').then(($el) => {
