@@ -1,5 +1,4 @@
 import carWashService from "../support/pages/carWashService";
-import fitnessSubmenu from "../support/pages/fitnessSubmenu";
 import freeListing from "../support/pages/freeListing";
 
 describe("Hackathon", () => {
@@ -9,34 +8,13 @@ describe("Hackathon", () => {
 
   it("First trial", () => {
     carWashService.visitHomePage(11.097208, 76.990016);
-
+    carWashService.clickMaybeLater();
+    
   });
-
-});
-
-describe("Gym Sub-menu", () => {
-  it("Base URL visit", () => {
-    fitnessSubmenu.visit();
-  });
-  it('Gym Navigation', () => {
-    fitnessSubmenu.gymNavigation();
-    fitnessSubmenu.verifyUrl();
-  });
-
-  it('Gym sub-menu verification', () => {
-    fitnessSubmenu.submenuVerification();
-  })
-
-  it('Gym sub-array items', () => {
-    fitnessSubmenu.subItemsFetching();
-  });
-})
-describe('Free Listing Registration', () => {
 });
 
 
-
-describe('Free Listing Registration ', () => {
+describe('Car Wash Service Automation - Free Listing Registration', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -61,6 +39,11 @@ describe('Free Listing Registration ', () => {
         freeListing.verifyErrorMessage();
       });
     });
+  it('Free Listing Navigation', function () {
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+    freeListing.clickFreeListing();
+    freeListing.verifyUrl();
 
   });
 
@@ -75,3 +58,5 @@ describe('Free Listing Registration ', () => {
 
 });
 
+});
+ 
