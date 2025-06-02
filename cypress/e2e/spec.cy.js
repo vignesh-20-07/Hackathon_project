@@ -13,7 +13,7 @@ describe("Hackathon", () => {
   });
 });
 
-describe('Car Wash Service Automation - Free Listing Registration', () => {
+describe('Free Listing Registration', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
