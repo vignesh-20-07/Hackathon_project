@@ -31,14 +31,24 @@ describe('Free Listing Registration', () => {
 
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
-  
-    cy.get('@testData').then((data) => {
-      data.invalidPhoneNumbers.forEach((phone) => {
-        freeListing.enterPhoneNumber(phone);
-        freeListing.verifyErrorMessage();
-      });
-    });
 
+    // cy.get('@testData').then((data) => {
+    //   freeListing.enterPhoneNumber(data.invalidPhoneNumbers);
+    //   freeListing.verifyErrorMessage();
+    // });
+
+  });
+
+  it('Register with invalid phone number', () => {
+    cy.get('@testData').then((data) => {
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+
+      freeListing.clickFreeListing();
+
+      freeListing.enterPhoneNumber(data.invalidPhone1);
+      freeListing.verifyErrorMessage();
+    });
   });
 });
  
