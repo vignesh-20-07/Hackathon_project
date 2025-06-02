@@ -33,6 +33,25 @@ class FreeListing {
         .should('be.visible')      
           
     }
+
+        enterPhoneNumber(phone) {
+          cy.get('input[name="pincode"]').eq(0)
+            .clear()
+            .type(phone)
+            .type('{enter}')
+            .wait(10000)
+      }
+
+      verifyOtpModalAppears() {
+        cy.get('body').then(($body) => {
+            const modalExists = $body.find('.modal_modal__zB_6A').length > 0;
+            cy.log(modalExists ? '✅ OTP modal appeared successfully' : '❌ Failed: OTP modal did not appear');
+            
+            if (modalExists) {
+                cy.get('.modal_modal__zB_6A').should('be.visible'); // Ensure it's visible
+            }
+        });
+    }
 }
 
 export default new FreeListing();
