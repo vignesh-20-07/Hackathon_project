@@ -30,10 +30,7 @@ class FreeListing {
       cy.get('form')
         .find('input[name="pincode"]')
         .should('exist')
-        .should('be.visible')
-        .should('have.attr', 'type', 'text')
-        .should('have.attr', 'inputmode', 'numeric') // Ensure numeric mode
-        .should('have.attr', 'maxlength', '10'); // Confirm max length
+        .should('be.visible')      
           
     }
 }

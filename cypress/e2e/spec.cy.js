@@ -1,17 +1,17 @@
 import carWashService from "../support/pages/carWashService";
 import freeListing from "../support/pages/freeListing";
 
-// describe("Hackathon", () => {
-//   Cypress.on("uncaught:exception", () => {
-//     return false;
-//   });
+describe("Hackathon", () => {
+  Cypress.on("uncaught:exception", () => {
+    return false;
+  });
 
-//   it("First trial", () => {
-//     carWashService.visitHomePage(11.097208, 76.990016);
-//     carWashService.clickMaybeLater();
+  it("First trial", () => {
+    carWashService.visitHomePage(11.097208, 76.990016);
+    carWashService.clickMaybeLater();
     
-//   });
-// });
+  });
+});
 
 
 describe('Car Wash Service Automation - Free Listing Registration', () => {
@@ -28,6 +28,9 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
   });
 
   it('Input Box Visibility', function () {
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+    freeListing.clickFreeListing();
     freeListing.inputboxVisible();
 
   });
