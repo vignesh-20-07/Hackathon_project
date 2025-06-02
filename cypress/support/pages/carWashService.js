@@ -11,10 +11,18 @@ class CarWashService {
     }
    
     clickMaybeLater() {
-      cy.get('.maybelater > .jsx-c21ded63fbf3c5d8')
-        .should("be.visible")
-        .click();
-    }
+        cy.get('body').then(($body) => {
+ 
+          if ($body.find('.maybelater > .jsx-c21ded63fbf3c5d8').length > 0) {
+            cy.get('.maybelater > .jsx-c21ded63fbf3c5d8')
+              .should("be.visible")
+              .click();
+          } else {
+           
+            cy.log('Maybe Later popup is not displayed, proceeding without clicking.');
+          }
+        });
+      }
    
     
   }
