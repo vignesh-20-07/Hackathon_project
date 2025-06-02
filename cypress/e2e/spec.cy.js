@@ -48,6 +48,7 @@ describe('Free Listing Registration', () => {
       freeListing.verifyErrorMessage();
     });
   });
+  
 
   it('Successful Registration For Valid Phone' , () =>{
     freeListing.visit();
@@ -59,3 +60,4 @@ describe('Free Listing Registration', () => {
 
 
 });
+
