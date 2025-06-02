@@ -63,13 +63,10 @@ describe('Free Listing Registration', () => {
   it('Free Listing Navigation', function () {
     freeListing.visit();
     freeListing.clickMaybeLater();
+    
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
 
-    // cy.get('@testData').then((data) => {
-    //   freeListing.enterPhoneNumber(data.invalidPhoneNumbers);
-    //   freeListing.verifyErrorMessage();
-    // });
   });
 
   it('Register with invalid phone number', () => {
@@ -92,6 +89,7 @@ describe('Free Listing Registration', () => {
 
       freeListing.enterPhoneNumber(data.invalidPhone2);
       freeListing.verifyErrorMessage();
+
     });
   });
 
@@ -103,6 +101,7 @@ describe('Free Listing Registration', () => {
 
       freeListing.enterPhoneNumber(data.invalidPhone3);
       freeListing.verifyErrorMessage();
+
     });
   });
 
@@ -112,6 +111,7 @@ describe('Free Listing Registration', () => {
 
     freeListing.clickFreeListing();
     freeListing.inputboxVisible();
+
   });
   
 
@@ -124,7 +124,8 @@ describe('Free Listing Registration', () => {
     });
    
     freeListing.verifyOtpModalAppears();
+
   });
   
 });
- 
+
