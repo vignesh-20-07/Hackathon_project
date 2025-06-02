@@ -18,12 +18,6 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
     return false;
   });
 
-  beforeEach(() => {
-    cy.fixture('example').then((data) => {
-      cy.wrap(data).as('testData');
-    });
-  });
-
   it('Register with invalid phone number', () => {
     cy.get('@testData').then((data) => {
       freeListing.visit();
