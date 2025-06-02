@@ -13,4 +13,17 @@ describe("Hackathon", () => {
   });
 });
 
+describe('Free Listing Registration', () => {
+  Cypress.on("uncaught:exception", (err, runnable) => {
+    return false;
+  });
 
+  it('Free Listing Navigation', () => {
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+
+    freeListing.clickFreeListing();
+    freeListing.verifyUrl();
+
+  });
+});
