@@ -18,17 +18,20 @@ class fitnessSubMenu {
     }
 
     subItemsFetching() {
-        const submenu = [];
         cy.get('.jsx-8e2185bd5f884df4 .font15')
-            .each(($el) => {
-                cy.wrap($el).invoke('text').then((text) => {
-                    submenu.push(text);
-                });
+            .then(($elements) => {
+                const submenu = $elements.map((index, el) => Cypress.$(el).text()).get();
+                cy.wrap(submenu).as('submenuArray');
             });
-        cy.wrap(submenu).each((data) => {
-            cy.log(data);
-        })
+
+        cy.get('@submenuArray').then((submenu) => {
+            expect(submenu).to.have.length.above(0);
+            submenu.forEach((data, index) => {
+                cy.log(`Item ${index + 1}: ${data}`);
+            });
+        });
     }
+
 
 }
 
