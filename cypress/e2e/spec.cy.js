@@ -1,4 +1,5 @@
 import carWashService from "../support/pages/carWashService";
+import fitnessSubmenu from "../support/pages/fitnessSubmenu";
 import freeListing from "../support/pages/freeListing";
 
 describe("Hackathon", () => {
@@ -8,27 +9,27 @@ describe("Hackathon", () => {
 
   it("First trial", () => {
     carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();
-    
+
   });
 
 });
 
 describe("Gym Sub-menu", () => {
-  it("First trial", () => {
-    // Visit homepage with geolocation stubbed
-    carWashService.visitHomePage(11.097208, 76.990016);
-
-    // carWashService.clickMaybeLater();
-
+  it("Base URL visit", () => {
+    fitnessSubmenu.visit();
   });
   it('Gym Navigation', () => {
     fitnessSubmenu.gymNavigation();
+    fitnessSubmenu.verifyUrl();
   });
+
+  it('Gym sub-menu verification', () => {
+    fitnessSubmenu.submenuVerification();
+  })
 
   it('Gym sub-array items', () => {
     fitnessSubmenu.subItemsFetching();
-  })
+  });
 })
 describe('Free Listing Registration', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
@@ -40,15 +41,15 @@ describe('Free Listing Registration', () => {
       cy.wrap(data).as('testData');
     });
   });
-  
+
   it('Free Listing Navigation, Validate Phone Number, and Capture Error', () => {
 
     freeListing.visit();
-    freeListing.clickMaybeLater();
+    // freeListing.clickMaybeLater();
 
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
-  
+
     cy.get('@testData').then((data) => {
       data.invalidPhoneNumbers.forEach((phone) => {
         freeListing.enterPhoneNumber(phone);
@@ -58,4 +59,4 @@ describe('Free Listing Registration', () => {
 
   });
 });
- 
+
