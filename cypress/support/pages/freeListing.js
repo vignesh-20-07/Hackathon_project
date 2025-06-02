@@ -4,7 +4,17 @@ class FreeListing {
     }
     
     clickMaybeLater() {
-        cy.get('.maybelater > .jsx-c21ded63fbf3c5d8').should("be.visible").click();
+      cy.get('body').then(($body) => {
+
+        if ($body.find('.maybelater > .jsx-c21ded63fbf3c5d8').length > 0) {
+          cy.get('.maybelater > .jsx-c21ded63fbf3c5d8')
+            .should("be.visible")
+            .click();
+        } else {
+         
+          cy.log('Maybe Later popup is not displayed, proceeding without clicking.');
+        }
+      });
     }
 
     clickFreeListing() {
@@ -15,14 +25,13 @@ class FreeListing {
       cy.url().should('include', 'Free-Listing');
     }
 
-    enterPhoneNumber(phoneNumber) {
-        cy.get('#1').clear().type(`${phoneNumber}{enter}`);
-    }
-
-    verifyErrorMessage() {
-        cy.get('.entermobilenumber_error__text__uPM09').should('be.visible').then(($el) => {
-            cy.log('Error Message:', $el.text());
-        });
+    inputboxVisible(){
+       
+      cy.get('form')
+        .find('input[name="pincode"]')
+        .should('exist')
+        .should('be.visible')      
+          
     }
 }
 

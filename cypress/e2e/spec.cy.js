@@ -2,7 +2,7 @@ import carWashService from "../support/pages/carWashService";
 import freeListing from "../support/pages/freeListing";
 
 describe("Hackathon", () => {
-  Cypress.on("uncaught:exception", (err, runnable) => {
+  Cypress.on("uncaught:exception", () => {
     return false;
   });
 
@@ -13,7 +13,7 @@ describe("Hackathon", () => {
   });
 });
 
-describe('Free Listing Registration', () => {
+describe('Car Wash Service Automation - Free Listing Registration', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -24,11 +24,9 @@ describe('Free Listing Registration', () => {
     });
   });
   
-  it('Free Listing Navigation, Validate Phone Number, and Capture Error', () => {
-
+  it('Free Listing Navigation', function () {
     freeListing.visit();
     freeListing.clickMaybeLater();
-
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
 
@@ -50,5 +48,13 @@ describe('Free Listing Registration', () => {
       freeListing.verifyErrorMessage();
     });
   });
+
+  it('Input Box Visibility', function () {
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+    freeListing.clickFreeListing();
+    freeListing.inputboxVisible();
+
+  });
+
 });
- 
