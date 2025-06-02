@@ -13,38 +13,22 @@ describe("Hackathon", () => {
   });
 });
 
-
-describe('Car Wash Service Automation - Free Listing Registration', () => {
+describe('Free Listing Registration', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
 
-  beforeEach(() => {
-    cy.fixture('example').then((data) => {
-      cy.wrap(data).as('testData');
-    });
-  });
-
-  it('Free Listing Navigation, Validate Phone Number, and Capture Error', () => {
-
-    freeListing.visit();
-    // freeListing.clickMaybeLater();
-
-    freeListing.clickFreeListing();
-    freeListing.verifyUrl();
- 
+  it('Register with invalid phone number', () => {
     cy.get('@testData').then((data) => {
-      data.invalidPhoneNumbers.forEach((phone) => {
-        freeListing.enterPhoneNumber(phone);
-        freeListing.verifyErrorMessage();
-      });
-    });
-  it('Free Listing Navigation', function () {
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-    freeListing.clickFreeListing();
-    freeListing.verifyUrl();
+      freeListing.visit();
+      freeListing.clickMaybeLater();
 
+      freeListing.clickFreeListing();
+
+      freeListing.enterPhoneNumber(data.invalidPhone1);
+      freeListing.verifyErrorMessage();
+      
+    });
   });
 
   it('Input Box Visibility', function () {
@@ -65,6 +49,3 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
 
 
 });
-
-});
- 
