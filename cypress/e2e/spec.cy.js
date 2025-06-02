@@ -55,6 +55,14 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
 
   });
 
+  it.only('Successful Registration For Valid Phone' , () =>{
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+    freeListing.clickFreeListing();
+    freeListing.enterPhoneNumber(9789395597);
+    freeListing.verifyOtpModalAppears();
+   })
+
 
 });
 
