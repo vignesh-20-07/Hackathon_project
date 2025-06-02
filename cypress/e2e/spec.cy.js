@@ -35,8 +35,18 @@ describe('Free Listing Registration', () => {
     freeListing.visit();
     freeListing.clickMaybeLater();
     freeListing.clickFreeListing();
-    freeListing.inputboxVisible();
+    freeListing.inputboxVisible(); 
+  });
+  
+  it('Register with empty phone number field', function () {
+    cy.get('@testData').then((data) => {
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
 
+      freeListing.enterPhoneNumber(data.invalidPhone2);
+      freeListing.verifyErrorMessage();
+    });
   });
 
   it('Successful Registration For Valid Phone' , () =>{
