@@ -21,7 +21,7 @@ describe("Hackathon", () => {
     cy.get('@testData').then((data) => {
       carWashService.checkCurrentLocation(data.location);
     });
-  })
+  });
 });
 
 describe("Gym Submenu Automation", () => {
@@ -44,9 +44,9 @@ describe("Gym Submenu Automation", () => {
 
   it('Retrieve the sub-menu items', () => {
     fitnessSubmenu.subItemsFetching();
-  })
+  });
 
-})
+});
 
 
 describe('Free Listing Registration', () => {
