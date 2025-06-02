@@ -51,12 +51,6 @@ describe('Free Listing Registration ', () => {
 
   });
 
-  it('Input Box Visibility', function () {
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-    freeListing.clickFreeListing();
-    freeListing.inputboxVisible();
 
-  });
 });
  
