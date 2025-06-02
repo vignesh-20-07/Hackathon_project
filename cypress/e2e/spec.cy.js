@@ -3,7 +3,7 @@ import fitnessSubmenu from "../support/pages/fitnessSubmenu";
 import freeListing from "../support/pages/freeListing";
 
 describe("Hackathon", () => {
-  Cypress.on("uncaught:exception", (err, runnable) => {
+  Cypress.on("uncaught:exception", () => {
     return false;
   });
 
@@ -32,6 +32,11 @@ describe("Gym Sub-menu", () => {
   });
 })
 describe('Free Listing Registration', () => {
+});
+
+
+
+describe('Free Listing Registration ', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -49,7 +54,7 @@ describe('Free Listing Registration', () => {
 
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
-
+ 
     cy.get('@testData').then((data) => {
       data.invalidPhoneNumbers.forEach((phone) => {
         freeListing.enterPhoneNumber(phone);
@@ -58,5 +63,15 @@ describe('Free Listing Registration', () => {
     });
 
   });
+
+  it('Input Box Visibility', function () {
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+    freeListing.clickFreeListing();
+    freeListing.inputboxVisible();
+
+  });
+
+
 });
 
