@@ -12,24 +12,7 @@ describe("Hackathon", () => {
     carWashService.clickMaybeLater();
     
   });
-});
 
-describe('Free Listing Registration', () => {
-  Cypress.on("uncaught:exception", (err, runnable) => {
-    return false;
-  });
-
-  beforeEach(() => {
-    cy.fixture('example').then((data) => {
-      cy.wrap(data).as('testData');
-    });
-  });
-
-  it("First trial", () => {
-    carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();
-
-  });
 
   it("Ensure location is changed" , ()=>{
     carWashService.visitHomePage(11.097208, 76.990016);
@@ -132,7 +115,6 @@ describe('Free Listing Registration', () => {
    
     freeListing.verifyOtpModalAppears();
    })
-
 
 });
 
