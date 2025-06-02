@@ -48,7 +48,6 @@ describe("Gym Submenu Automation", () => {
 
 });
 
-
 describe('Free Listing Registration', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
@@ -114,7 +113,6 @@ describe('Free Listing Registration', () => {
 
   });
   
-
   it('Successful Registration For Valid Phone' , () =>{
     freeListing.visit();
     freeListing.clickMaybeLater();
