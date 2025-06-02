@@ -39,7 +39,7 @@ describe('Free Listing Registration', () => {
 
   });
 
-  it.only('Successful Registration For Valid Phone' , () =>{
+  it('Successful Registration For Valid Phone' , () =>{
     freeListing.visit();
     freeListing.clickMaybeLater();
     freeListing.clickFreeListing();
