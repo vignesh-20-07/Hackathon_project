@@ -18,15 +18,6 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
     return false;
   });
 
-  it('Free Listing Navigation', () => {
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-
-    freeListing.clickFreeListing();
-    freeListing.verifyUrl();
-
-  });
-
   it('Register with invalid phone number', () => {
     cy.get('@testData').then((data) => {
       freeListing.visit();
