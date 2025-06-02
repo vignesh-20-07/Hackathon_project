@@ -1,7 +1,7 @@
 import carWashService from "../support/pages/carWashService";
 import freeListing from "../support/pages/freeListing";
 
-describe("Hackathon", () => {
+describe.only("Hackathon", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -11,6 +11,16 @@ describe("Hackathon", () => {
     carWashService.clickMaybeLater();
     
   });
+
+  it('Navigate to page',()=>{
+    carWashService.navigateToPage();
+  })
+   it("Sort with ratings",()=>{
+    carWashService.ratings();
+   })
+   it("sortabove20",()=>{
+    carWashService.sortabove20();
+   })
 });
 
 describe('Free Listing Registration', () => {
@@ -27,7 +37,7 @@ describe('Free Listing Registration', () => {
   it('Free Listing Navigation, Validate Phone Number, and Capture Error', () => {
 
     freeListing.visit();
-    freeListing.clickMaybeLater();
+    //freeListing.clickMaybeLater();
 
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
