@@ -34,13 +34,13 @@ class FreeListing {
           
     }
 
-        enterPhoneNumber(phone) {
-          cy.get('input[name="pincode"]').eq(0)
-            .clear()
-            .type(phone)
-            .type('{enter}')
-            .wait(10000)
-      }
+    enterPhoneNumber(phone) {
+      cy.get('input[name="pincode"]').eq(0)
+        .clear()
+        .type(phone)
+        .type('{enter}')
+        .wait(10000)
+    }
 
       verifyOtpModalAppears() {
         cy.get('body').then(($body) => {
@@ -48,7 +48,7 @@ class FreeListing {
             cy.log(modalExists ? '✅ OTP modal appeared successfully' : '❌ Failed: OTP modal did not appear');
             
             if (modalExists) {
-                cy.get('.modal_modal__zB_6A').should('be.visible'); // Ensure it's visible
+                cy.get('.modal_modal__zB_6A').should('be.visible');
             }
         });
     }
