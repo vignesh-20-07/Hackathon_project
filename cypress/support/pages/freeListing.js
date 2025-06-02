@@ -39,6 +39,12 @@ class FreeListing {
       .wait(10000)
   }
 
+  verifyErrorMessage() {
+    cy.get('.entermobilenumber_error__text__uPM09').should('be.visible').then(($el) => {
+        cy.log('Error Message:', $el.text());
+    });
+  }
+  
   verifyOtpModalAppears() {
     cy.get('body').then(($body) => {
       const modalExists = $body.find('.modal_modal__zB_6A').length > 0;
