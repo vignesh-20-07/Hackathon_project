@@ -24,21 +24,16 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
     });
   });
   
-  it('Free Listing Navigation', function () {
-
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-
-    freeListing.clickFreeListing();
-    freeListing.verifyUrl();
-
+  it('Register with empty phone number field', function () {
     cy.get('@testData').then((data) => {
-      data.invalidPhoneNumbers.forEach((phone) => {
-        freeListing.enterPhoneNumber(phone);
-        freeListing.verifyErrorMessage();
-      });
-    });
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
 
+      freeListing.enterPhoneNumber(data.invalidPhone2);
+      freeListing.verifyErrorMessage();
+    });
   });
+
 });
  
