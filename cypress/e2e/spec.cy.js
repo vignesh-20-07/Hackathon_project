@@ -38,7 +38,7 @@ describe("Gym Submenu Automation", () => {
 })
 
 
-describe('Car Wash Service Automation - Free Listing Registration', () => {
+describe('Free Listing Registration', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -54,29 +54,6 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
     freeListing.clickMaybeLater();
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
-
-    cy.get('@testData').then((data) => {
-      data.invalidPhoneNumbers.forEach((phone) => {
-        freeListing.enterPhoneNumber(phone);
-        freeListing.verifyErrorMessage();
-      });
-    });
-    it('Free Listing Navigation', function () {
-      freeListing.visit();
-      freeListing.clickMaybeLater();
-      freeListing.clickFreeListing();
-      freeListing.verifyUrl();
-
-    });
-
-    it('Input Box Visibility', function () {
-      freeListing.visit();
-      freeListing.clickMaybeLater();
-      freeListing.clickFreeListing();
-      freeListing.inputboxVisible();
-
-    });
-
 
     // cy.get('@testData').then((data) => {
     //   freeListing.enterPhoneNumber(data.invalidPhoneNumbers);
@@ -94,7 +71,16 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
 
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
+      
     });
+  });
+
+  it('Input Box Visibility', function () {
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+    freeListing.clickFreeListing();
+    freeListing.inputboxVisible();
+
   });
 
 });
