@@ -9,9 +9,34 @@ describe("Hackathon", () => {
   it("First trial", () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
-    
+
   });
 });
+
+describe("Gym Submenu Automation", () => {
+  Cypress.on("uncaught:exception", (err, runnable) => {
+    return false;
+  });
+
+  it('Visit the Gym page', () => {
+    fitnessSubmenu.visit();
+    fitnessSubmenu.gymNavigation();
+  });
+
+  it('Verify the URL', () => {
+    fitnessSubmenu.verifyUrl();
+  });
+
+  it('Assert the presence of sub-menu items', () => {
+    fitnessSubmenu.submenuVerification();
+  });
+
+  it('Retrieve the sub-menu items', () => {
+    fitnessSubmenu.subItemsFetching();
+  })
+
+})
+
 
 describe('Car Wash Service Automation - Free Listing Registration', () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
@@ -30,6 +55,29 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
 
+    cy.get('@testData').then((data) => {
+      data.invalidPhoneNumbers.forEach((phone) => {
+        freeListing.enterPhoneNumber(phone);
+        freeListing.verifyErrorMessage();
+      });
+    });
+    it('Free Listing Navigation', function () {
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
+      freeListing.verifyUrl();
+
+    });
+
+    it('Input Box Visibility', function () {
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
+      freeListing.inputboxVisible();
+
+    });
+
+
     // cy.get('@testData').then((data) => {
     //   freeListing.enterPhoneNumber(data.invalidPhoneNumbers);
     //   freeListing.verifyErrorMessage();
@@ -47,14 +95,6 @@ describe('Car Wash Service Automation - Free Listing Registration', () => {
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
     });
-  });
-
-  it('Input Box Visibility', function () {
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-    freeListing.clickFreeListing();
-    freeListing.inputboxVisible();
-
   });
 
 });
