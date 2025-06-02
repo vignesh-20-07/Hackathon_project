@@ -18,4 +18,13 @@ describe('Free Listing Registration', () => {
     return false;
   });
 
+  it('Free Listing Navigation', () => {
+    freeListing.visit();
+    freeListing.clickMaybeLater();
+
+    freeListing.clickFreeListing();
+    freeListing.verifyUrl();
+
+  });
+
 });
