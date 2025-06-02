@@ -7,11 +7,26 @@ describe("Hackathon", () => {
     return false;
   });
 
+  beforeEach(() => {
+    cy.fixture('example').then((data) => {
+      cy.wrap(data).as('testData');
+    });
+  });
+
   it("First trial", () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
 
   });
+
+  it("Ensure location is changed" , ()=>{
+    carWashService.visitHomePage(11.097208, 76.990016);
+    carWashService.clickMaybeLater();   
+   
+    cy.get('@testData').then((data) => {
+      carWashService.checkCurrentLocation(data.location);
+    });
+  })
 });
 
 describe("Gym Submenu Automation", () => {
@@ -67,9 +82,7 @@ describe('Free Listing Registration', () => {
     cy.get('@testData').then((data) => {
       freeListing.visit();
       freeListing.clickMaybeLater();
-
       freeListing.clickFreeListing();
-
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
       
@@ -100,7 +113,10 @@ describe('Free Listing Registration', () => {
     freeListing.visit();
     freeListing.clickMaybeLater();
     freeListing.clickFreeListing();
-    freeListing.enterPhoneNumber(9789395597);
+    cy.get('@testData').then((data) => {
+      freeListing.enterPhoneNumber(data.phonenumber);
+    });
+   
     freeListing.verifyOtpModalAppears();
    })
 
