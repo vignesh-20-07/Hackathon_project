@@ -1,9 +1,10 @@
 {
  
   "invalidPhoneNumbers": ["3452748992", "", "9856748"],
-  "phonenumber" : 9789395595,
+  "phonenumber" : "9789395595",
   "name": "Using fixtures to represent data",
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes",
-  "invalidPhone1": "3452748992"
+  "invalidPhone1": "3452748992",
+  "location" : "Chil Sez"
 }

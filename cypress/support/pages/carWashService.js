@@ -23,6 +23,16 @@ class CarWashService {
           }
         });
       }
+
+      getLocationValue() {
+        return cy.get('#city-auto-sug').invoke('val'); // Extracts value from input
+       }
+
+        checkCurrentLocation(expectedText) {
+            this.getLocationValue().then((location) => {
+                expect(location).to.include(expectedText); // Assertion to check "Chil Sez"
+            });
+        }
    
     
   }
