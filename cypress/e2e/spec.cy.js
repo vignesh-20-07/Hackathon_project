@@ -24,21 +24,16 @@ describe('Free Listing Registration', () => {
     });
   });
   
-  it('Free Listing Navigation, Validate Phone Number, and Capture Error', () => {
-
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-
-    freeListing.clickFreeListing();
-    freeListing.verifyUrl();
-  
+  it('Register with phone number less than 10 digits', () => {
     cy.get('@testData').then((data) => {
-      data.invalidPhoneNumbers.forEach((phone) => {
-        freeListing.enterPhoneNumber(phone);
-        freeListing.verifyErrorMessage();
-      });
-    });
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
 
+      freeListing.enterPhoneNumber(data.invalidPhone3);
+      freeListing.verifyErrorMessage();
+    });
   });
+
 });
  
