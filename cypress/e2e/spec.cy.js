@@ -2,7 +2,7 @@ import carWashService from "../support/pages/carWashService";
 import fitnessSubmenu from "../support/pages/fitnessSubmenu";
 import freeListing from "../support/pages/freeListing";
 
-describe.only("Car Wash Service searching and sorting", () => {
+describe("Car Wash Service searching and sorting", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
