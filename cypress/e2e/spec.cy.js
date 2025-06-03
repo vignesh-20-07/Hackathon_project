@@ -32,6 +32,13 @@ describe.only("Car Wash Service searching and sorting", () => {
     carWashService.sortabove20();
    })
 
+   it("Check for correct location after sorting" , ()=>{
+   
+    
+     carWashService.verifyCityContains(testdata.city);      
   
+   })
+
+ 
 });
 
