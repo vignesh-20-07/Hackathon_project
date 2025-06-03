@@ -24,7 +24,10 @@ describe.only("Car Wash Service searching and sorting", () => {
   it('Navigate to page',()=>{
     carWashService.navigateToPage(testdata.service);
   })
-  
+   it("Sort with ratings",()=>{
+    carWashService.ratings();
+   })
+   
   
 });
 
