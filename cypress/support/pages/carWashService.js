@@ -1,11 +1,11 @@
 class CarWashService {
-    visitHomePage(latitude, longitude) {
-      cy.visit("https://www.justdial.com/", {
-        onBeforeLoad({ navigator }) {
-          cy.stub(navigator.geolocation, "getCurrentPosition")
-            .callsArgWith(0, { coords: { latitude, longitude } });
-        },
-      });
+  visitHomePage(latitude, longitude) {
+    cy.visit("https://www.justdial.com/", {
+      onBeforeLoad({ navigator }) {
+        cy.stub(navigator.geolocation, "getCurrentPosition")
+          .callsArgWith(0, { coords: { latitude, longitude } });
+      },
+    });
    
       cy.wait(5000);
     }
@@ -56,11 +56,56 @@ class CarWashService {
         // Log results
         cy.log('Filtered and sorted ratings:', ratings);
     });
-    }
+
+    cy.wait(5000);
+  }
     //"jsx-193cf54a15e7e6b7 more_filter_sidebar pl-30 pr-30"
 
     //class="jsx-193cf54a15e7e6b7 mb-20"
     
+   
+  
+   
+  clickMaybeLater() {
+    cy.get('body').then(($body) => {
+ 
+      if ($body.find('.maybelater > .jsx-c21ded63fbf3c5d8').length > 0) {
+        cy.get('.maybelater > .jsx-c21ded63fbf3c5d8')
+          .should("be.visible")
+          .click();
+      } else {     
+        cy.log('Maybe Later popup is not displayed, proceeding without clicking.');
+      }
+    });
+  }
+
+  getLocationValue() {
+    return cy.get('#city-auto-sug').invoke('val');
+  }
+
+  checkCurrentLocation(expectedText) {
+    this.getLocationValue().then((location) => {
+      expect(location).to.include(expectedText);
+     });
+  }
+
+  visitHomePage(latitude, longitude) {
+    cy.visit("https://www.justdial.com/", {
+      onBeforeLoad({ navigator }) {
+        cy.stub(navigator.geolocation, "getCurrentPosition")
+          .callsArgWith(0, { coords: { latitude, longitude } });
+      },
+    });
+   
+    cy.wait(5000);
   }
    
-  export default new CarWashService();
+  clickMaybeLater() {
+    cy.get('.maybelater > .jsx-c21ded63fbf3c5d8')
+      .should("be.visible")
+      .click();
+  } 
+    
+}
+   
+export default new CarWashService();
