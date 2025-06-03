@@ -38,7 +38,6 @@ describe.only("Car Wash Service searching and sorting", () => {
      carWashService.verifyCityContains(testdata.city);      
   
    })
-
- 
+   
 });
 
