@@ -15,19 +15,23 @@ export default defineConfig({
     testIsolation: false,    
     async setupNodeEvents(on, config) {
       // Use dynamic import with the .js extension as suggested by the error
-      const mochawesomePlugin = await import('cypress-mochawesome-reporter/plugin.js');
-      mochawesomePlugin.default(on);
+      const { default: mochawesomePlugin } = await import('cypress-mochawesome-reporter/plugin.js');
+      mochawesomePlugin(on);
  
       // Configure the Cypress browser permissions plugin
       config = cypressBrowserPermissionsPlugin(on, config);
  
-      // Return the updated config so Cypress uses these settings
+      // Fix Cypress Grep Plugin import
+      const { default: grepPlugin } = await import('@cypress/grep/src/plugin.js');
+      grepPlugin(config);
+ 
       return config;
     },
     env: {
       browserPermissions: {
         geolocation: 'allow', // Allow geolocation for your tests
       },
+      grepFilterSpecs: true
     },
   },
 });

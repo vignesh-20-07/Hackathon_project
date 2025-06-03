@@ -26,12 +26,13 @@ class fitnessSubMenu {
 
         cy.get('@submenuArray').then((submenu) => {
             expect(submenu).to.have.length.above(0);
+            cy.log(`Total submenu items: ${submenu.length}`);
+
             submenu.forEach((data, index) => {
                 cy.log(`Item ${index + 1}: ${data}`);
             });
         });
     }
-
 
 }
 
