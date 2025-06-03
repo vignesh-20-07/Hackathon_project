@@ -21,17 +21,20 @@ class fitnessSubMenu {
         cy.get('.jsx-8e2185bd5f884df4 .font15')
             .then(($elements) => {
                 const submenu = $elements.map((index, el) => Cypress.$(el).text()).get();
-                cy.wrap(submenu).as('submenuArray');
+                cy.wrap(submenu).as('submenuArray'); // Store the array as an alias
             });
 
         cy.get('@submenuArray').then((submenu) => {
+            // Assert the array is not empty
             expect(submenu).to.have.length.above(0);
+            cy.log(`Total submenu items: ${submenu.length}`);
+
+            // Log the submenu items
             submenu.forEach((data, index) => {
                 cy.log(`Item ${index + 1}: ${data}`);
             });
         });
     }
-
 
 }
 
