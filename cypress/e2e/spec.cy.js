@@ -95,9 +95,7 @@ describe('Free Listing Registration', () => {
 
   it('Register with invalid phone number', () => {
     cy.get('@testData').then((data) => {
-      freeListing.visit();
-      freeListing.clickMaybeLater();
-      freeListing.clickFreeListing();
+    
       
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
@@ -107,9 +105,7 @@ describe('Free Listing Registration', () => {
 
   it('Register with empty phone number field', function () {
     cy.get('@testData').then((data) => {
-      freeListing.visit();
-      freeListing.clickMaybeLater();
-      freeListing.clickFreeListing();
+     
 
       freeListing.enterPhoneNumber(data.invalidPhone2);
       freeListing.verifyErrorMessage();
@@ -119,10 +115,7 @@ describe('Free Listing Registration', () => {
 
   it('Register with phone number less than 10 digits', () => {
     cy.get('@testData').then((data) => {
-      freeListing.visit();
-      freeListing.clickMaybeLater();
-      freeListing.clickFreeListing();
-
+     
       freeListing.enterPhoneNumber(data.invalidPhone3);
       freeListing.verifyErrorMessage();
 
@@ -130,17 +123,12 @@ describe('Free Listing Registration', () => {
   });
 
   it('Input Box Visibility', function () {
-    freeListing.visit();
-
-    freeListing.clickFreeListing();
+   
     freeListing.inputboxVisible();
 
   });
   
   it('Successful Registration For Valid Phone' , () =>{
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-    freeListing.clickFreeListing();
     cy.get('@testData').then((data) => {
       freeListing.enterPhoneNumber(data.phonenumber);
     });
