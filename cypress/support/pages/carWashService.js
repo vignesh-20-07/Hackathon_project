@@ -30,8 +30,8 @@ class CarWashService {
       });
     }
 
-    navigateToPage(){
-      cy.get('#main-auto').click().type('Car Wash Services Near Me',{delay:200});
+    navigateToPage(service){
+      cy.get('#main-auto').click().type(service ,{delay:200});
       cy.get('.search_button').click();
       //cy.get('.search_button').click();
       //cy.wait(30000);
@@ -59,26 +59,9 @@ class CarWashService {
 
     cy.wait(5000);
   }
-    //"jsx-193cf54a15e7e6b7 more_filter_sidebar pl-30 pr-30"
-
-    //class="jsx-193cf54a15e7e6b7 mb-20"
+   
     
-   
   
-   
-  clickMaybeLater() {
-    cy.get('body').then(($body) => {
- 
-      if ($body.find('.maybelater > .jsx-c21ded63fbf3c5d8').length > 0) {
-        cy.get('.maybelater > .jsx-c21ded63fbf3c5d8')
-          .should("be.visible")
-          .click();
-      } else {     
-        cy.log('Maybe Later popup is not displayed, proceeding without clicking.');
-      }
-    });
-  }
-
   getLocationValue() {
     return cy.get('#city-auto-sug').invoke('val');
   }
@@ -100,11 +83,19 @@ class CarWashService {
     cy.wait(5000);
   }
    
-  clickMaybeLater() {
-    cy.get('.maybelater > .jsx-c21ded63fbf3c5d8')
-      .should("be.visible")
-      .click();
-  } 
+ 
+  cityDivs = '.locatcity.font15.fw400.color111';
+
+  getCities() {
+    return cy.get(this.cityDivs);
+  }
+
+  verifyCityContains(expectedText) {
+    this.getCities().then(($elements) => {
+      const texts = [...$elements].map(el => el.innerText);
+      expect(texts.some(text => text.includes(expectedText))).to.be.true;
+    });
+  }
     
 }
    

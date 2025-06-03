@@ -7,6 +7,15 @@ describe.only("Car Wash Service searching and sorting", () => {
     return false;
   });
 
+  let testdata;
+
+  before(() => {
+    cy.fixture('example').then((data) => {
+     testdata = data;
+    });
+  });
+  
+
   it("Visiting the site", () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
@@ -14,7 +23,7 @@ describe.only("Car Wash Service searching and sorting", () => {
   });
 
   it('Navigate to page',()=>{
-    carWashService.navigateToPage();
+    carWashService.navigateToPage(testdata.service);
   })
    it("Sort with ratings",()=>{
     carWashService.ratings();
@@ -23,13 +32,20 @@ describe.only("Car Wash Service searching and sorting", () => {
     carWashService.sortabove20();
    })
 
+   it("Check for correct location after sorting" , ()=>{
+   
+    
+     carWashService.verifyCityContains(testdata.city);      
+  
+   })
+
   it("Ensure location is changed" , ()=>{
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();   
    
-    cy.get('@testData').then((data) => {
-      carWashService.checkCurrentLocation(data.location);
-    });
+   
+      carWashService.checkCurrentLocation(testdata.location);
+   
   });
 });
 
