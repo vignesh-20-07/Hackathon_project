@@ -1,5 +1,5 @@
 import carWashService from "../support/pages/carWashService";
-import fitnessSubmenu from "../support/pages/fitnessSubmenu";
+import fitnessSubmenu from "../support/pages/fitnessSubMenu";
 import freeListing from "../support/pages/freeListing";
 
 describe("Car Wash Service searching and sorting", () => {
