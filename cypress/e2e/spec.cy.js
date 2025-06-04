@@ -16,7 +16,7 @@ describe("Car Wash Service searching and sorting", () => {
   });
   
 
-  it("Visiting the site", { tags: ['@carwash'] }, () => {
+  it("Visiting the site", () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
     
@@ -83,7 +83,7 @@ describe('Free Listing Registration', () => {
     });
   });
   
-  it('Free Listing Navigation', function () {
+  it('Free Listing Navigation', { tags: [' '] }, () => {
     freeListing.visit();
     freeListing.clickMaybeLater();
     
@@ -92,9 +92,11 @@ describe('Free Listing Registration', () => {
 
   });
 
-  it('Register with invalid phone number', () => {
+  it('Register with invalid phone number', { tags: [''] }, () => {
     cy.get('@testData').then((data) => {
-    
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
       
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
@@ -102,9 +104,11 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Register with empty phone number field', function () {
+  it('Register with empty phone number field', { tags: [''] }, () => {
     cy.get('@testData').then((data) => {
-     
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
 
       freeListing.enterPhoneNumber(data.invalidPhone2);
       freeListing.verifyErrorMessage();
@@ -112,8 +116,11 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Register with phone number less than 10 digits', () => {
+  it('Register with phone number less than 10 digits', { tags: [''] }, () => {
     cy.get('@testData').then((data) => {
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+      freeListing.clickFreeListing();
      
       freeListing.enterPhoneNumber(data.invalidPhone3);
       freeListing.verifyErrorMessage();
