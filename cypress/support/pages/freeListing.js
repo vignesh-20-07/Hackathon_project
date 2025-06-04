@@ -44,7 +44,7 @@ class FreeListing {
   verifyOtpModalAppears() {
     cy.get('body').then(($body) => {
       const modalExists = $body.find('.modal_modal__zB_6A').length > 0;
-      cy.log(modalExists ? '✅ OTP modal appeared successfully' : '❌ Failed: OTP modal did not appear');
+      cy.log(modalExists ? 'OTP modal appeared successfully' : 'Failed: OTP modal did not appear');
             
       if (modalExists) {
         cy.get('.modal_modal__zB_6A').should('be.visible');

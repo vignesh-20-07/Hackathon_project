@@ -41,8 +41,7 @@ describe("Car Wash Service searching and sorting", () => {
 
   it("Ensure location is changed" ,  { tags: ['@carwash'] } ,()=>{
     carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();   
-   
+    carWashService.clickMaybeLater();     
    
       carWashService.checkCurrentLocation(testdata.location);
    
