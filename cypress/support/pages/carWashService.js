@@ -58,9 +58,8 @@ class CarWashService {
     });
 
     cy.wait(5000);
-  }  
-   
-  
+  }
+
   getLocationValue() {
     return cy.get('#city-auto-sug').invoke('val');
   }

@@ -1,5 +1,5 @@
 import carWashService from "../support/pages/carWashService";
-import fitnessSubmenu from "../support/pages/fitnessSubmenu";
+import fitnessSubmenu from "../support/pages/fitnessSubMenu";
 import freeListing from "../support/pages/freeListing";
 
 describe.only("Car Wash Service searching and sorting", () => {
@@ -16,13 +16,13 @@ describe.only("Car Wash Service searching and sorting", () => {
   });
   
 
-  it("Visiting the site", { tags: ['@carwash'] }, () => {
+  it("Visiting the site" , { tags: ['@smoke'] } , () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
     
   });
 
-  it('Navigate to page', { tags: ['@carwash'] } ,()=>{
+  it('Navigate to page', ()=>{
     carWashService.navigateToPage(testdata.service);
   })
    it("Sort with ratings",()=>{
@@ -32,15 +32,14 @@ describe.only("Car Wash Service searching and sorting", () => {
     carWashService.sortabove20();
    })
 
-   it("Check for correct location after sorting" , ()=>{
-   
+   it("Check for correct location after sorting" , ()=>{  
     
      carWashService.verifyCityContains(testdata.city);      
   
    })
    
 
-  it("Ensure location is changed" ,  { tags: ['@carwash'] } ,()=>{
+  it("Ensure location is changed" ,{tags : ['@regression' , '@integration' , '@smoke']},()=>{
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();     
    
@@ -84,7 +83,7 @@ describe('Free Listing Registration', () => {
     });
   });
   
-  it('Free Listing Navigation', function () {
+  it('Free Listing Navigation', { tags: ['@smoke', '@GUI'] }, () => {
     freeListing.visit();
     freeListing.clickMaybeLater();
     
@@ -93,9 +92,12 @@ describe('Free Listing Registration', () => {
 
   });
 
-  it('Register with invalid phone number', () => {
+  it('Register with invalid phone number', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
-    
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+
+      freeListing.clickFreeListing();
       
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
@@ -103,9 +105,12 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Register with empty phone number field', function () {
+  it('Register with empty phone number field', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
-     
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+
+      freeListing.clickFreeListing();
 
       freeListing.enterPhoneNumber(data.invalidPhone2);
       freeListing.verifyErrorMessage();
@@ -113,8 +118,12 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Register with phone number less than 10 digits', () => {
+  it('Register with phone number less than 10 digits', { tags: ['@negative', '@validation'] }, () => {
     cy.get('@testData').then((data) => {
+      freeListing.visit();
+      freeListing.clickMaybeLater();
+
+      freeListing.clickFreeListing();
      
       freeListing.enterPhoneNumber(data.invalidPhone3);
       freeListing.verifyErrorMessage();
@@ -122,13 +131,18 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Input Box Visibility', function () {
-   
+  it('Input Box Visibility', { tags: ['@GUI'] }, () => {  
+    freeListing.visit();
+    freeListing.clickMaybeLater();    
+    freeListing.clickFreeListing(); 
     freeListing.inputboxVisible();
 
   });
   
-  it('Successful Registration For Valid Phone' , () =>{
+  it('Successful Registration For Valid Phone' , { tags: ['@smoke' , '@regression'] },() =>{
+    freeListing.visit();
+    freeListing.clickMaybeLater();    
+    freeListing.clickFreeListing();
     cy.get('@testData').then((data) => {
       freeListing.enterPhoneNumber(data.phonenumber);
     });
