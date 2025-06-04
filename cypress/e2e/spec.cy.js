@@ -16,13 +16,13 @@ describe("Car Wash Service searching and sorting", () => {
   });
   
 
-  it("Visiting the site", { tags: ['@carwash'] }, () => {
+  it("Visiting the site" , { tags: ['@smoke'] } , () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
     
   });
 
-  it('Navigate to page', { tags: ['@carwash'] } ,()=>{
+  it('Navigate to page', ()=>{
     carWashService.navigateToPage(testdata.service);
   })
    it("Sort with ratings",()=>{
@@ -32,14 +32,14 @@ describe("Car Wash Service searching and sorting", () => {
     carWashService.sortabove20();
    })
 
-   it("Check for correct location after sorting" , ()=>{
-   
+   it("Check for correct location after sorting" , ()=>{  
     
      carWashService.verifyCityContains(testdata.city);      
   
    })
+   
 
-  it("Ensure location is changed" ,  { tags: ['@carwash'] } ,()=>{
+  it("Ensure location is changed" ,{tags : ['@regression' , '@integration' , '@smoke']},()=>{
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();     
    
@@ -121,13 +121,18 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Input Box Visibility', function () {
-   
+  it('Input Box Visibility', { tags: ['@GUI'] }, () => {  
+    freeListing.visit();
+    freeListing.clickMaybeLater();    
+    freeListing.clickFreeListing(); 
     freeListing.inputboxVisible();
 
   });
   
-  it('Successful Registration For Valid Phone' , () =>{
+  it('Successful Registration For Valid Phone' , { tags: ['@smoke' , '@regression'] },() =>{
+    freeListing.visit();
+    freeListing.clickMaybeLater();    
+    freeListing.clickFreeListing();
     cy.get('@testData').then((data) => {
       freeListing.enterPhoneNumber(data.phonenumber);
     });
