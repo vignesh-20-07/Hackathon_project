@@ -11,58 +11,46 @@ describe.only("Car Wash Service searching and sorting", () => {
 
   before(() => {
     cy.fixture('example').then((data) => {
-     testdata = data;
+      testdata = data;
     });
   });
-  
 
-  it("Visiting the site", { tags: ['@smoke'] }, () => {
+
+  it("Visiting the site", { tags: ['@smoke', '@GUI', '@unit', '@regression', '@integration'] }, () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
-    
+
   });
- 
-  it('Navigate to page', { tags: ['@GUI'] } ,()=>{
-    carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();
+
+  it('Navigate to page', { tags: ['@smoke', '@GUI', '@unit', '@regression', '@integration'] }, () => {
 
     carWashService.navigateToPage(testdata.service);
   })
-   it("Sort with ratings",{tags:['@unit']},()=>{
-    carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();
-    
-    carWashService.navigateToPage(testdata.service);
-    carWashService.ratings();
-   })
-   it("sortabove20",{tags:['@unit']},()=>{
-    carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();
 
-    carWashService.navigateToPage(testdata.service);
+  it("Sort with ratings", { tags: ['@unit'] }, () => {
+
+    carWashService.ratings();
+  })
+  
+  it("sortabove20", { tags: ['@unit'] }, () => {
 
     carWashService.ratings();
     carWashService.sortabove20();
-   })
+  })
 
-   it("Check for correct location after sorting",{tags:['@unit']} , ()=>{
-    carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();
+  it("Check for correct location after sorting", { tags: ['@unit'] }, () => {
 
-    carWashService.navigateToPage(testdata.service);
     carWashService.ratings();
-    
-    carWashService.verifyCityContains(testdata.city);      
-  
-   })
-   
 
-  it("Ensure location is changed" ,{tags : ['@regression' , '@integration' , '@smoke']},()=>{
-    carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();     
-   
-      carWashService.checkCurrentLocation(testdata.location);
-   
+    carWashService.verifyCityContains(testdata.city);
+
+  })
+
+
+  it("Ensure location is changed", { tags: ['@regression', '@integration', '@smoke'] }, () => {
+
+    carWashService.checkCurrentLocation(testdata.location);
+
   });
 });
 
@@ -100,11 +88,11 @@ describe('Free Listing Registration', () => {
       cy.wrap(data).as('testData');
     });
   });
-  
+
   it('Free Listing Navigation', { tags: ['@smoke', '@GUI', '@negative'] }, () => {
     freeListing.visit();
     freeListing.clickMaybeLater();
-    
+
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
 
@@ -112,10 +100,10 @@ describe('Free Listing Registration', () => {
 
   it('Register with invalid phone number', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
-      
+
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
-      
+
     });
   });
 
@@ -130,26 +118,29 @@ describe('Free Listing Registration', () => {
 
   it('Register with phone number less than 10 digits', { tags: ['@negative', '@validation'] }, () => {
     cy.get('@testData').then((data) => {
-     
+
       freeListing.enterPhoneNumber(data.invalidPhone3);
       freeListing.verifyErrorMessage();
 
     });
   });
 
-  it('Input Box Visibility', { tags: ['@GUI'] }, () => {  
+  it('Input Box Visibility', { tags: ['@GUI'] }, () => {
+
     freeListing.inputboxVisible();
 
   });
-  
-  it('Successful Registration For Valid Phone' , { tags: ['@smoke' , '@regression'] },() =>{
+
+  it('Successful Registration For Valid Phone', { tags: ['@smoke', '@regression'] }, () => {
     cy.get('@testData').then((data) => {
+
       freeListing.enterPhoneNumber(data.phonenumber);
+
     });
-   
+
     freeListing.verifyOtpModalAppears();
 
   });
-  
+
 });
 
