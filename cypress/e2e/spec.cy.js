@@ -1,5 +1,5 @@
 import carWashService from "../support/pages/carWashService";
-import fitnessSubmenu from "../support/pages/fitnessSubmenu";
+import fitnessSubmenu from "../support/pages/fitnessSubMenu";
 import freeListing from "../support/pages/freeListing";
 
 describe("Car Wash Service searching and sorting", () => {
@@ -83,7 +83,7 @@ describe('Free Listing Registration', () => {
     });
   });
   
-  it('Free Listing Navigation', { tags: [' '] }, () => {
+  it('Free Listing Navigation', { tags: ['@smoke', '@GUI'] }, () => {
     freeListing.visit();
     freeListing.clickMaybeLater();
     
@@ -92,10 +92,11 @@ describe('Free Listing Registration', () => {
 
   });
 
-  it('Register with invalid phone number', { tags: [''] }, () => {
+  it('Register with invalid phone number', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
       freeListing.visit();
       freeListing.clickMaybeLater();
+
       freeListing.clickFreeListing();
       
       freeListing.enterPhoneNumber(data.invalidPhone1);
@@ -104,10 +105,11 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Register with empty phone number field', { tags: [''] }, () => {
+  it('Register with empty phone number field', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
       freeListing.visit();
       freeListing.clickMaybeLater();
+
       freeListing.clickFreeListing();
 
       freeListing.enterPhoneNumber(data.invalidPhone2);
@@ -116,10 +118,11 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Register with phone number less than 10 digits', { tags: [''] }, () => {
+  it('Register with phone number less than 10 digits', { tags: ['@negative', '@validation'] }, () => {
     cy.get('@testData').then((data) => {
       freeListing.visit();
       freeListing.clickMaybeLater();
+
       freeListing.clickFreeListing();
      
       freeListing.enterPhoneNumber(data.invalidPhone3);
