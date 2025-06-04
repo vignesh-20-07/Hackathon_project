@@ -1,5 +1,5 @@
 import carWashService from "../support/pages/carWashService";
-import fitnessSubmenu from "../support/pages/fitnessSubmenu";
+import fitnessSubmenu from "../support/pages/fitnessSubMenu";
 import freeListing from "../support/pages/freeListing";
 
 describe("Car Wash Service searching and sorting", () => {
@@ -25,26 +25,28 @@ describe("Car Wash Service searching and sorting", () => {
   it('Navigate to page', { tags: ['@smoke', '@unit', '@regression', '@integration'] }, () => {
 
     carWashService.navigateToPage(testdata.service);
-  })
+
+  });
 
   it("Sort with ratings", { tags: ['@smoke'] }, () => {
 
     carWashService.ratings();
-  })
+
+  });
 
   it("sortabove20", { tags: ['@sanity'] }, () => {
 
     carWashService.ratings();
     carWashService.sortabove20();
-  })
+
+  });
 
   it("Check for correct location after sorting", { tags: ['@regression'] }, () => {
 
     carWashService.ratings();
-
     carWashService.verifyCityContains(testdata.city);
 
-  })
+  });
 
 
   it("Ensure location is changed", { tags: ['@regression', '@integration', '@smoke'] }, () => {
@@ -60,21 +62,30 @@ describe("Gym Submenu Automation", () => {
   });
 
   it("Visit the Gym page", { tags: ['@smoke', '@GUI', '@Regression'] }, () => {
+
     fitnessSubmenu.visit();
     fitnessSubmenu.gymNavigation();
+
   });
 
   it("Verify the URL", { tags: ['@smoke', '@GUI', '@Regression'] }, () => {
+
     fitnessSubmenu.verifyUrl();
+
   });
 
   it("Assert the presence of sub-menu items", { tags: ['@GUI'] }, () => {
     fitnessSubmenu.submenuVerification();
+
   });
 
   it("Retrieve the sub-menu items", { tags: ['@regression'] }, () => {
+
     fitnessSubmenu.subItemsFetching();
+
   });
+
+  fitnessSubmenu.subItemsFetching();
 
 });
 
@@ -90,6 +101,7 @@ describe('Free Listing Registration', () => {
   });
 
   it('Free Listing Navigation', { tags: ['@smoke', '@GUI', '@negative'] }, () => {
+
     freeListing.visit();
     freeListing.clickMaybeLater();
 
@@ -141,6 +153,5 @@ describe('Free Listing Registration', () => {
     freeListing.verifyOtpModalAppears();
 
   });
-
 });
 
