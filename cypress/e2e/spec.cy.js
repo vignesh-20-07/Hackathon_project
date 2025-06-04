@@ -16,26 +16,38 @@ describe.only("Car Wash Service searching and sorting", () => {
   });
   
 
-  it("Visiting the site", { tags: ['@carwash'] }, () => {
+  it("Visiting the site", { tags: ['@smoke'] }, () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
     
   });
-
-  it('Navigate to page', { tags: ['@carwash'] } ,()=>{
+ 
+  it('Navigate to page', { tags: ['@GUI'] } ,()=>{
+    carWashService.visitHomePage(11.097208, 76.990016);
+    carWashService.clickMaybeLater();
     carWashService.navigateToPage(testdata.service);
   })
-   it("Sort with ratings",()=>{
+   it("Sort with ratings",{tags:['@unit']},()=>{
+    carWashService.visitHomePage(11.097208, 76.990016);
+    carWashService.clickMaybeLater();
+    
+    carWashService.navigateToPage(testdata.service);
     carWashService.ratings();
    })
-   it("sortabove20",()=>{
+   it("sortabove20",{tags:['@unit']},()=>{
+    carWashService.visitHomePage(11.097208, 76.990016);
+    carWashService.clickMaybeLater();
+    carWashService.navigateToPage(testdata.service);
+    carWashService.ratings();
     carWashService.sortabove20();
    })
 
-   it("Check for correct location after sorting" , ()=>{
-   
-    
-     carWashService.verifyCityContains(testdata.city);      
+   it("Check for correct location after sorting",{tags:['@unit']} , ()=>{
+    carWashService.visitHomePage(11.097208, 76.990016);
+    carWashService.clickMaybeLater();
+    carWashService.navigateToPage(testdata.service);
+    carWashService.ratings();
+    carWashService.verifyCityContains(testdata.city);      
   
    })
    
