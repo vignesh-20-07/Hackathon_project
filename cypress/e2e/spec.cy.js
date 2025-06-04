@@ -2,7 +2,7 @@ import carWashService from "../support/pages/carWashService";
 import fitnessSubmenu from "../support/pages/fitnessSubMenu";
 import freeListing from "../support/pages/freeListing";
 
-describe("Car Wash Service searching and sorting", () => {
+describe.only("Car Wash Service searching and sorting", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -11,41 +11,46 @@ describe("Car Wash Service searching and sorting", () => {
 
   before(() => {
     cy.fixture('example').then((data) => {
-     testdata = data;
+      testdata = data;
     });
   });
-  
 
-  it("Visiting the site", { tags: ['@carwash'] }, () => {
+
+  it("Visiting the site", { tags: ['@smoke', '@GUI', '@unit', '@regression', '@integration'] }, () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
-    
+
   });
 
-  it('Navigate to page', { tags: ['@carwash'] } ,()=>{
+  it('Navigate to page', { tags: ['@smoke', '@GUI', '@unit', '@regression', '@integration'] }, () => {
+
     carWashService.navigateToPage(testdata.service);
   })
-   it("Sort with ratings",()=>{
+
+  it("Sort with ratings", { tags: ['@unit'] }, () => {
+
     carWashService.ratings();
-   })
-   it("sortabove20",()=>{
-    carWashService.sortabove20();
-   })
-
-   it("Check for correct location after sorting" , ()=>{
-   
-    
-     carWashService.verifyCityContains(testdata.city);      
+  })
   
-   })
+  it("sortabove20", { tags: ['@unit'] }, () => {
 
-  it("Ensure location is changed" ,  { tags: ['@carwash'] } ,()=>{
-    carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();   
-   
-   
-      carWashService.checkCurrentLocation(testdata.location);
-   
+    carWashService.ratings();
+    carWashService.sortabove20();
+  })
+
+  it("Check for correct location after sorting", { tags: ['@unit'] }, () => {
+
+    carWashService.ratings();
+
+    carWashService.verifyCityContains(testdata.city);
+
+  })
+
+
+  it("Ensure location is changed", { tags: ['@regression', '@integration', '@smoke'] }, () => {
+
+    carWashService.checkCurrentLocation(testdata.location);
+
   });
 });
 
@@ -83,29 +88,27 @@ describe('Free Listing Registration', () => {
       cy.wrap(data).as('testData');
     });
   });
-  
-  it('Free Listing Navigation', function () {
+
+  it('Free Listing Navigation', { tags: ['@smoke', '@GUI', '@negative'] }, () => {
     freeListing.visit();
     freeListing.clickMaybeLater();
-    
+
     freeListing.clickFreeListing();
     freeListing.verifyUrl();
 
   });
 
-  it('Register with invalid phone number', () => {
+  it('Register with invalid phone number', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
-    
-      
+
       freeListing.enterPhoneNumber(data.invalidPhone1);
       freeListing.verifyErrorMessage();
-      
+
     });
   });
 
-  it('Register with empty phone number field', function () {
+  it('Register with empty phone number field', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
-     
 
       freeListing.enterPhoneNumber(data.invalidPhone2);
       freeListing.verifyErrorMessage();
@@ -113,29 +116,31 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Register with phone number less than 10 digits', () => {
+  it('Register with phone number less than 10 digits', { tags: ['@negative', '@validation'] }, () => {
     cy.get('@testData').then((data) => {
-     
+
       freeListing.enterPhoneNumber(data.invalidPhone3);
       freeListing.verifyErrorMessage();
 
     });
   });
 
-  it('Input Box Visibility', function () {
-   
+  it('Input Box Visibility', { tags: ['@GUI'] }, () => {
+
     freeListing.inputboxVisible();
 
   });
-  
-  it('Successful Registration For Valid Phone' , () =>{
+
+  it('Successful Registration For Valid Phone', { tags: ['@smoke', '@regression'] }, () => {
     cy.get('@testData').then((data) => {
+
       freeListing.enterPhoneNumber(data.phonenumber);
+
     });
-   
+
     freeListing.verifyOtpModalAppears();
 
   });
-  
+
 });
 
