@@ -2,7 +2,7 @@ import carWashService from "../support/pages/carWashService";
 import fitnessSubmenu from "../support/pages/fitnessSubmenu";
 import freeListing from "../support/pages/freeListing";
 
-describe.only("Car Wash Service searching and sorting", () => {
+describe("Car Wash Service searching and sorting", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -121,12 +121,18 @@ describe('Free Listing Registration', () => {
     });
   });
 
-  it('Input Box Visibility', { tags: ['@GUI'] }, () => {   
+  it('Input Box Visibility', { tags: ['@GUI'] }, () => {  
+    freeListing.visit();
+    freeListing.clickMaybeLater();    
+    freeListing.clickFreeListing(); 
     freeListing.inputboxVisible();
 
   });
   
   it('Successful Registration For Valid Phone' , { tags: ['@smoke' , '@regression'] },() =>{
+    freeListing.visit();
+    freeListing.clickMaybeLater();    
+    freeListing.clickFreeListing();
     cy.get('@testData').then((data) => {
       freeListing.enterPhoneNumber(data.phonenumber);
     });
