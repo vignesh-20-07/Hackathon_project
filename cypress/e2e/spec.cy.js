@@ -15,8 +15,8 @@ describe.only("Car Wash Service searching and sorting", () => {
     });
   });
 
-
   it("Visiting the site", { tags: ['@smoke', '@GUI', '@unit', '@regression', '@integration'] }, () => {
+
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
 
@@ -25,26 +25,28 @@ describe.only("Car Wash Service searching and sorting", () => {
   it('Navigate to page', { tags: ['@smoke', '@GUI', '@unit', '@regression', '@integration'] }, () => {
 
     carWashService.navigateToPage(testdata.service);
-  })
+
+  });
 
   it("Sort with ratings", { tags: ['@unit'] }, () => {
 
     carWashService.ratings();
-  })
+
+  });
   
   it("sortabove20", { tags: ['@unit'] }, () => {
 
     carWashService.ratings();
     carWashService.sortabove20();
-  })
+
+  });
 
   it("Check for correct location after sorting", { tags: ['@unit'] }, () => {
 
     carWashService.ratings();
-
     carWashService.verifyCityContains(testdata.city);
 
-  })
+  });
 
 
   it("Ensure location is changed", { tags: ['@regression', '@integration', '@smoke'] }, () => {
@@ -60,22 +62,29 @@ describe("Gym Submenu Automation", () => {
   });
 
   it('Visit the Gym page', () => {
+
     fitnessSubmenu.visit();
     fitnessSubmenu.gymNavigation();
+
   });
 
   it('Verify the URL', () => {
+
     fitnessSubmenu.verifyUrl();
+
   });
 
   it('Assert the presence of sub-menu items', () => {
+
     fitnessSubmenu.submenuVerification();
+
   });
 
   it('Retrieve the sub-menu items', () => {
-    fitnessSubmenu.subItemsFetching();
-  });
 
+    fitnessSubmenu.subItemsFetching();
+
+  });
 });
 
 describe('Free Listing Registration', () => {
@@ -90,6 +99,7 @@ describe('Free Listing Registration', () => {
   });
 
   it('Free Listing Navigation', { tags: ['@smoke', '@GUI', '@negative'] }, () => {
+
     freeListing.visit();
     freeListing.clickMaybeLater();
 
@@ -141,6 +151,5 @@ describe('Free Listing Registration', () => {
     freeListing.verifyOtpModalAppears();
 
   });
-
 });
 
