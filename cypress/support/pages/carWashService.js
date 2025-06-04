@@ -71,18 +71,6 @@ class CarWashService {
      });
   }
 
-  visitHomePage(latitude, longitude) {
-    cy.visit("https://www.justdial.com/", {
-      onBeforeLoad({ navigator }) {
-        cy.stub(navigator.geolocation, "getCurrentPosition")
-          .callsArgWith(0, { coords: { latitude, longitude } });
-      },
-    });
-   
-    cy.wait(5000);
-  }
-   
- 
   cityDivs = '.locatcity.font15.fw400.color111';
 
   getCities() {
@@ -95,7 +83,6 @@ class CarWashService {
       expect(texts.some(text => text.includes(expectedText))).to.be.true;
     });
   }
-    
-}
-   
+
+} 
 export default new CarWashService();

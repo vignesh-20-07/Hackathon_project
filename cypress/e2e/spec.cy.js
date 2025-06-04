@@ -2,7 +2,7 @@ import carWashService from "../support/pages/carWashService";
 import fitnessSubmenu from "../support/pages/fitnessSubmenu";
 import freeListing from "../support/pages/freeListing";
 
-describe("Car Wash Service searching and sorting", () => {
+describe.only("Car Wash Service searching and sorting", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -38,6 +38,7 @@ describe("Car Wash Service searching and sorting", () => {
      carWashService.verifyCityContains(testdata.city);      
   
    })
+   
 
   it("Ensure location is changed" ,  { tags: ['@carwash'] } ,()=>{
     carWashService.visitHomePage(11.097208, 76.990016);
