@@ -25,7 +25,7 @@ class CarWashService {
   }
 
   navigateToPage(service) {
-    cy.get('#main-auto').click().type(service, { delay: 200 });
+    cy.get('#main-auto').click().type(service);
     cy.get('.search_button').click();
   }
 
@@ -95,7 +95,7 @@ class CarWashService {
     }).then(() => {
       cy.log('--- Final Results ---');
       finalResults.forEach((result) => {
-        cy.log(`Service Name : ${result.service} - Phone Number : ${result.phone}`);
+        cy.log(`Service Name : ${result.service}`);
       });
     });
   }
