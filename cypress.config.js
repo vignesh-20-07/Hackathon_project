@@ -12,6 +12,7 @@ export default defineConfig({
   scrollBehavior: 'nearest',
   chromeWebSecurity: false,
   e2e: {
+    testIsolation:false,
     async setupNodeEvents(on, config) {
       // Use dynamic import with the .js extension as suggested by the error
       const mochawesomePlugin = await import('cypress-mochawesome-reporter/plugin.js');
