@@ -44,22 +44,7 @@ class CarWashService {
       cy.get('.jsx-193cf54a15e7e6b7.more_filter_btnbox').contains('Apply Filters').click({force:true});
     }
 
-     sortabove20(){
-      cy.get('.resultbox_countrate.mr-12.font15.fw400.color777').then(($elements) => {
-        let ratings = $elements.map((index, el) => {
-            return parseInt(el.innerText.match(/\d+/)[0], 10); // Extract number
-        }).get();
-
-        // Filter out ratings <= 20 and sort in descending order
-        ratings = ratings.filter(num => num > 20).sort((a, b) => b - a);
-
-        // Log results
-        cy.log('Filtered and sorted ratings:', ratings);
-    });
-
-    cy.wait(5000);
-  }
-
+    
   getLocationValue() {
     return cy.get('#city-auto-sug').invoke('val');
   }
@@ -82,6 +67,103 @@ class CarWashService {
       expect(texts.some(text => text.includes(expectedText))).to.be.true;
     });
   }
+
+  sortings() {
+    cy.get('.jsx-8e2185bd5f884df4.resfilter_item_outer').contains('Top Rated').click({ force: true });
+    cy.get('.resultbox_countrate.mr-12.font15.fw400.color777').then(($el) => {
+      const valid = [];
+      const service = [];
+      $el.each((index, el) => {
+        const text = el.innerText;
+        const cleanedText = text.replace(/,/g, '');
+        //class="jsx-7cbb814d75c86232 resultbox_title_anchor font22 fw500 color111 line_clamp_1 "
+        const match = cleanedText.match(/\d+/);
+        if (match) {
+          const votes = parseInt(match[0], 10);
+          if (votes > 20) {
+            valid.push({ votes });
+          }
+        }
+      })
+      // Log directly to the browser console.
+      console.log('Valid Elements:', valid);
+      //cy.log('Valid Elements:', JSON.stringify(valid, null, 2));
+    })
+  }
+
+  serviceName(){
+    const finalResults = [];
+   
+  // Process each service card; limit to the top 5.
+  cy.get('.jsx-7cbb814d75c86232.resultbox_info').each(($card, index) => {
+    if (index >= 5) {
+      return false; // Exit after processing five cards.
+    }
+   
+    // Get the service name from within the current card.
+    cy.wrap($card)
+      .find('.jsx-7cbb814d75c86232.resultbox_title.font22.fw500.color111.complist_title h3')
+      .invoke('text')
+      .then((serviceText) => {
+        const trimmedService = serviceText.trim() || 'Unknown Service';
+   
+        // Get the call content (phone info or 'Show Number') from within the same card.
+        cy.wrap($card)
+          .find('.jsx-7cbb814d75c86232.callcontent')
+          .invoke('text')
+          .then((callText) => {
+            const trimmedCallText = callText.trim();
+            if (trimmedCallText.includes('Show Number')) {
+              // Ensure the button is inside a shadow DOM before clicking
+              cy.wrap($card)
+                .find('.whitecall_icon')
+                .should('be.visible')
+                .scrollIntoView()
+                .then(($btn) => {
+                  if ($btn.length > 0) {
+                    cy.wrap($btn).click({ force: true });
+   
+                    // Wait for the popup-rendered number inside shadow DOM
+                    cy.get('body')
+                     
+                      .find('.popbddvn__left > div')
+                      .last()
+                      .invoke('text')
+                      .then((numberText) => {
+                        const trimmedNumber = numberText.trim();
+                        const phoneOutput = /\d+/.test(trimmedNumber) ? trimmedNumber : 'Number not displayed';
+   
+                        cy.log(`Service Name : ${trimmedService} - Phone Number : ${phoneOutput}`);
+                        finalResults.push({ service: trimmedService, phone: phoneOutput });
+   
+                        // Close the popup safely inside shadow DOM
+                        cy.get('body')
+                         
+                          .find('.jsx-dcde576cdf171c2a.jd_modal_close.jdicon')
+                          .should('be.visible')
+                          .click({ force: true });
+                      });
+                  } else {
+                    cy.log('Button not found inside shadow DOM, skipping this step.');
+                  }
+                });
+            } else {
+              const phoneOutput = /\d+/.test(trimmedCallText) ? trimmedCallText : 'Number not displayed';
+   
+              cy.log(`Service Name : ${trimmedService} - Phone Number : ${phoneOutput}`);
+              finalResults.push({ service: trimmedService, phone: phoneOutput });
+            }
+          });
+      });
+  }).then(() => {
+    // Log a summary of the final results after processing all cards.
+    cy.log('--- Final Results ---');
+    finalResults.forEach((result) => {
+      cy.log(`Service Name : ${result.service} - Phone Number : ${result.phone}`);
+    });
+  });
+  }
+
 
 } 
 export default new CarWashService();
