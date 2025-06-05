@@ -63,7 +63,6 @@ class CarWashService {
     cy.get('.jsx-8e2185bd5f884df4.resfilter_item_outer').contains('Top Rated').click({ force: true });
     cy.get('.resultbox_countrate.mr-12.font15.fw400.color777').then(($el) => {
       const valid = [];
-      const service = [];
       $el.each((index, el) => {
         const text = el.innerText;
         const cleanedText = text.replace(/,/g, '');
@@ -90,46 +89,8 @@ class CarWashService {
         .invoke('text')
         .then((serviceText) => {
           const trimmedService = serviceText.trim() || 'Unknown Service';
-          cy.wrap($card)
-            .find('.jsx-7cbb814d75c86232.callcontent')
-            .invoke('text')
-            .then((callText) => {
-              const trimmedCallText = callText.trim();
-              if (trimmedCallText.includes('Show Number')) {
-                cy.wrap($card)
-                  .find('.whitecall_icon')
-                  .should('be.visible')
-                  .scrollIntoView()
-                  .then(($btn) => {
-                    if ($btn.length > 0) {
-                      cy.wrap($btn).click({ force: true });
-                      cy.get('body')
-
-                        .find('.popbddvn__left > div')
-                        .last()
-                        .invoke('text')
-                        .then((numberText) => {
-                          const trimmedNumber = numberText.trim();
-                          const phoneOutput = /\d+/.test(trimmedNumber) ? trimmedNumber : 'Number not displayed';
-
-                          cy.log(`Service Name : ${trimmedService} - Phone Number : ${phoneOutput}`);
-                          finalResults.push({ service: trimmedService, phone: phoneOutput });
-                          cy.get('body')
-                            .find('.jsx-dcde576cdf171c2a.jd_modal_close.jdicon')
-                            .should('be.visible')
-                            .click({ force: true });
-                        });
-                    } else {
-                      cy.log('Button not found inside shadow DOM, skipping this step.');
-                    }
-                  });
-              } else {
-                const phoneOutput = /\d+/.test(trimmedCallText) ? trimmedCallText : 'Number not displayed';
-
-                cy.log(`Service Name : ${trimmedService} - Phone Number : ${phoneOutput}`);
-                finalResults.push({ service: trimmedService, phone: phoneOutput });
-              }
-            });
+          cy.log(`Service Name : ${trimmedService}`);
+          finalResults.push({ service: trimmedService });
         });
     }).then(() => {
       cy.log('--- Final Results ---');
