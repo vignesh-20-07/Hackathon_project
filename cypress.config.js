@@ -14,14 +14,9 @@ export default defineConfig({
   e2e: {
     testIsolation: false,    
     async setupNodeEvents(on, config) {
-      // Use dynamic import with the .js extension as suggested by the error
       const { default: mochawesomePlugin } = await import('cypress-mochawesome-reporter/plugin.js');
       mochawesomePlugin(on);
- 
-      // Configure the Cypress browser permissions plugin
       config = cypressBrowserPermissionsPlugin(on, config);
- 
-      // Fix Cypress Grep Plugin import
       const { default: grepPlugin } = await import('@cypress/grep/src/plugin.js');
       grepPlugin(config);
  
@@ -29,7 +24,7 @@ export default defineConfig({
     },
     env: {
       browserPermissions: {
-        geolocation: 'allow', // Allow geolocation for your tests
+        geolocation: 'allow',
       },
       grepFilterSpecs: true
     },
