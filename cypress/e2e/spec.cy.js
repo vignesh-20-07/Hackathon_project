@@ -28,9 +28,13 @@ describe.only("Car Wash Service searching and sorting", () => {
    it("Sort with ratings",()=>{
     carWashService.ratings();
    })
-   it("sortabove20",()=>{
-    carWashService.sortabove20();
-   })
+   it('Sort with votings',()=>{
+    carWashService.sortings();
+  })
+
+  it('Service Name',()=>{
+    carWashService.serviceName()
+  })
 
   
 });
