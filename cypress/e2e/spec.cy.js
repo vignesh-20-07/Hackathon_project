@@ -2,7 +2,7 @@ import carWashService from "../support/pages/carWashService";
 import fitnessSubmenu from "../support/pages/fitnessSubMenu";
 import freeListing from "../support/pages/freeListing";
 
-describe.only("Car Wash Service searching and sorting", () => {
+describe("Car Wash Service searching and sorting", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
     return false;
   });
@@ -15,33 +15,33 @@ describe.only("Car Wash Service searching and sorting", () => {
     });
   });
 
-  it("Visiting the site", { tags: ['@smoke', '@GUI', '@unit', '@regression', '@integration'] }, () => {
 
+  it("Visiting the site", { tags: ['@smoke', '@unit', '@sanity', '@regression', '@integration'] }, () => {
     carWashService.visitHomePage(11.097208, 76.990016);
     carWashService.clickMaybeLater();
 
   });
 
-  it('Navigate to page', { tags: ['@smoke', '@GUI', '@unit', '@regression', '@integration'] }, () => {
+  it('Navigate to page', { tags: ['@smoke', '@unit', '@regression', '@integration'] }, () => {
 
     carWashService.navigateToPage(testdata.service);
 
   });
 
-  it("Sort with ratings", { tags: ['@unit'] }, () => {
+  it("Sort with ratings", { tags: ['@smoke'] }, () => {
 
     carWashService.ratings();
 
   });
-  
-  it("sortabove20", { tags: ['@unit'] }, () => {
+
+  it("sortabove20", { tags: ['@sanity'] }, () => {
 
     carWashService.ratings();
     carWashService.sortabove20();
 
   });
 
-  it("Check for correct location after sorting", { tags: ['@unit'] }, () => {
+  it("Check for correct location after sorting", { tags: ['@regression'] }, () => {
 
     carWashService.ratings();
     carWashService.verifyCityContains(testdata.city);
@@ -61,30 +61,32 @@ describe("Gym Submenu Automation", () => {
     return false;
   });
 
-  it('Visit the Gym page', () => {
+  it("Visit the Gym page", { tags: ['@smoke', '@GUI', '@Regression'] }, () => {
 
     fitnessSubmenu.visit();
     fitnessSubmenu.gymNavigation();
 
   });
 
-  it('Verify the URL', () => {
+  it("Verify the URL", { tags: ['@smoke', '@GUI', '@Regression'] }, () => {
 
     fitnessSubmenu.verifyUrl();
 
   });
 
-  it('Assert the presence of sub-menu items', () => {
-
+  it("Assert the presence of sub-menu items", { tags: ['@GUI'] }, () => {
     fitnessSubmenu.submenuVerification();
 
   });
 
-  it('Retrieve the sub-menu items', () => {
+  it("Retrieve the sub-menu items", { tags: ['@regression'] }, () => {
 
     fitnessSubmenu.subItemsFetching();
 
   });
+
+  fitnessSubmenu.subItemsFetching();
+
 });
 
 describe('Free Listing Registration', () => {
