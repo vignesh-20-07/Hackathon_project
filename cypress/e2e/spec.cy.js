@@ -1,23 +1,37 @@
 import carWashService from "../support/pages/carWashService";
- 
-describe("Hackathon", () => {
-  beforeEach(()=>{
-    //cy.visit('https://www.justdial.com/');
-    Cypress.on("uncaught:exception", (err, runnable) => {
-      return false;
+import fitnessSubmenu from "../support/pages/fitnessSubmenu";
+import freeListing from "../support/pages/freeListing";
+
+describe.only("Car Wash Service searching and sorting", () => {
+  Cypress.on("uncaught:exception", (err, runnable) => {
+    return false;
+  });
+
+  let testdata;
+
+  before(() => {
+    cy.fixture('example').then((data) => {
+     testdata = data;
     });
-   
-  })
- 
-  it("First trial", () => {
-    // Visit homepage with geolocation stubbed
+  });
+  
+
+  it("Visiting the site", () => {
     carWashService.visitHomePage(11.097208, 76.990016);
-    cy.wait(6000);
     carWashService.clickMaybeLater();
     
   });
 
- 
+  it('Navigate to page',()=>{
+    carWashService.navigateToPage(testdata.service);
+  })
+   it("Sort with ratings",()=>{
+    carWashService.ratings();
+   })
+   it("sortabove20",()=>{
+    carWashService.sortabove20();
+   })
 
+  
 });
- 
+
