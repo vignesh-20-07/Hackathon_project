@@ -28,14 +28,16 @@ describe.only("Car Wash Service searching and sorting", () => {
   })
 
   it("Sort with ratings", { tags: ['@unit'] }, () => {
-
     carWashService.ratings();
   })
   
   it("sortabove20", { tags: ['@unit'] }, () => {
-
     carWashService.ratings();
-    carWashService.sortabove20();
+    carWashService.sortings();
+  })
+
+  it('Service Name', { tags : '@GUI'},()=>{
+    carWashService.serviceName()
   })
 
   it("Check for correct location after sorting", { tags: ['@unit'] }, () => {
