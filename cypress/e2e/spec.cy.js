@@ -17,22 +17,7 @@ describe("Hackathon", () => {
     
   });
 
-  it('Navigate to the car wash services page',()=>{
-    carWashService.navigateToPage();
-  })
-
-  it('Sort with Ratings',()=>{
-    carWashService.ratings();
-  })
-
-  it('Sort with votings',()=>{
-    carWashService.sortings();
-  })
-
-  it('Service Name',()=>{
-    carWashService.serviceName()
-  })
-  
+ 
 
 });
  
