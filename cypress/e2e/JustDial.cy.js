@@ -1,6 +1,6 @@
-import carWashService from "../support/pages/carWashService";
-import fitnessSubmenu from "../support/pages/fitnessSubMenu";
-import freeListing from "../support/pages/freeListing";
+import carWashService from "../support/pages/CarWashService";
+import fitnessSubmenu from "../support/pages/FitnessSubMenu";
+import freeListing from "../support/pages/FreeListing";
 
 describe("Car Wash Service searching and sorting", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
@@ -28,7 +28,7 @@ describe("Car Wash Service searching and sorting", () => {
     carWashService.ratings();
   })
 
-  it("sortabove20", { tags: ['@sanity'] }, () => {
+  it("sortabove20", { tags: ['@smoke'] }, () => {
     carWashService.ratings();
     carWashService.sortings();
   })
@@ -43,7 +43,7 @@ describe("Car Wash Service searching and sorting", () => {
   });
 
 
-  it("Ensure location is changed", { tags: ['@regression', '@integration', '@smoke'] }, () => {
+  it("Ensure location is changed", { tags: ['@regression', '@smoke'] }, () => {
     carWashService.checkCurrentLocation(testdata.location);
   });
 });
@@ -53,14 +53,14 @@ describe("Gym Submenu Automation", () => {
     return false;
   });
 
-  it("Visit the Gym page", { tags: ['@smoke', '@GUI', '@Regression'] }, () => {
+  it("Visit the Gym page", { tags: ['@smoke', '@GUI', '@regression'] }, () => {
 
     fitnessSubmenu.visit();
     fitnessSubmenu.gymNavigation();
 
   });
 
-  it("Verify the URL", { tags: ['@smoke', '@GUI', '@Regression'] }, () => {
+  it("Verify the URL", { tags: ['@smoke', '@GUI', '@regression'] }, () => {
     fitnessSubmenu.verifyUrl();
   });
 

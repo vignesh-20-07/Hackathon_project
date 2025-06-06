@@ -35,25 +35,13 @@ class CarWashService {
     cy.get('.jsx-193cf54a15e7e6b7.more_filter_btnbox').contains('Apply Filters').click({ force: true });
   }
 
-
-  getLocationValue() {
-    return cy.get('#city-auto-sug').invoke('val');
-  }
-
   checkCurrentLocation(expectedText) {
-    this.getLocationValue().then((location) => {
+    cy.get('#city-auto-sug').invoke('val').then((location) => {
       expect(location).to.include(expectedText);
     });
   }
-
-  cityDivs = '.locatcity.font15.fw400.color111';
-
-  getCities() {
-    return cy.get(this.cityDivs);
-  }
-
   verifyCityContains(expectedText) {
-    this.getCities().then(($elements) => {
+    cy.get('.locatcity.font15.fw400.color111').then(($elements) => {
       const texts = [...$elements].map(el => el.innerText);
       expect(texts.some(text => text.includes(expectedText))).to.be.true;
     });
