@@ -15,12 +15,12 @@ describe("Car Wash Service searching and sorting", () => {
     });
   });
 
-  it("Visiting the site", { tags: ['@smoke', '@unit', '@sanity', '@regression', '@integration'] }, () => {
+  it("Visiting the site", { tags: ['@smoke', '@unit', '@regression'] }, () => {
     CarWashService.visitHomePage(11.097208, 76.990016);
     CarWashService.clickMaybeLater();
   });
 
-  it('Navigate to page', { tags: ['@smoke', '@unit', '@regression', '@integration'] }, () => {
+  it('Navigate to page', { tags: ['@smoke', '@unit', '@regression'] }, () => {
     CarWashService.navigateToPage(testdata.service);
   });
 
