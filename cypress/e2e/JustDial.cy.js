@@ -1,6 +1,6 @@
-import carWashService from "../support/pages/CarWashService";
-import fitnessSubmenu from "../support/pages/FitnessSubMenu";
-import freeListing from "../support/pages/FreeListing";
+import CarWashService from "../support/pages/CarWashService";
+import fitnessSubmenu from "../support/pages/fitnessSubmenu";
+import FreeListing from "../support/pages/FreeListing";
 
 describe("Car Wash Service searching and sorting", () => {
   Cypress.on("uncaught:exception", (err, runnable) => {
@@ -16,35 +16,35 @@ describe("Car Wash Service searching and sorting", () => {
   });
 
   it("Visiting the site", { tags: ['@smoke', '@unit', '@sanity', '@regression', '@integration'] }, () => {
-    carWashService.visitHomePage(11.097208, 76.990016);
-    carWashService.clickMaybeLater();
+    CarWashService.visitHomePage(11.097208, 76.990016);
+    CarWashService.clickMaybeLater();
   });
 
   it('Navigate to page', { tags: ['@smoke', '@unit', '@regression', '@integration'] }, () => {
-    carWashService.navigateToPage(testdata.service);
+    CarWashService.navigateToPage(testdata.service);
   });
 
   it("Sort with ratings", { tags: ['@smoke'] }, () => {
-    carWashService.ratings();
+    CarWashService.ratings();
   })
 
   it("sortabove20", { tags: ['@smoke'] }, () => {
-    carWashService.ratings();
-    carWashService.sortings();
+    CarWashService.ratings();
+    CarWashService.sortings();
   })
 
   it('Service Name', { tags: '@GUI' }, () => {
-    carWashService.serviceName()
+    CarWashService.serviceName()
   })
 
   it("Check for correct location after sorting", { tags: ['@regression'] }, () => {
-    carWashService.ratings();
-    carWashService.verifyCityContains(testdata.city);
+    CarWashService.ratings();
+    CarWashService.verifyCityContains(testdata.city);
   });
 
 
   it("Ensure location is changed", { tags: ['@regression', '@smoke'] }, () => {
-    carWashService.checkCurrentLocation(testdata.location);
+    CarWashService.checkCurrentLocation(testdata.location);
   });
 });
 
@@ -86,42 +86,42 @@ describe('Free Listing Registration', () => {
   });
 
   it('Free Listing Navigation', { tags: ['@smoke', '@GUI', '@negative'] }, () => {
-    freeListing.visit();
-    freeListing.clickMaybeLater();
-    freeListing.clickFreeListing();
-    freeListing.verifyUrl();
+    FreeListing.visit();
+    FreeListing.clickMaybeLater();
+    FreeListing.clickFreeListing();
+    FreeListing.verifyUrl();
   });
 
   it('Register with invalid phone number', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
-      freeListing.enterPhoneNumber(data.invalidPhone1);
-      freeListing.verifyErrorMessage();
+      FreeListing.enterPhoneNumber(data.invalidPhone1);
+      FreeListing.verifyErrorMessage();
     });
   });
 
   it('Register with empty phone number field', { tags: ['@negative'] }, () => {
     cy.get('@testData').then((data) => {
-      freeListing.enterPhoneNumber(data.invalidPhone2);
-      freeListing.verifyErrorMessage();
+      FreeListing.enterPhoneNumber(data.invalidPhone2);
+      FreeListing.verifyErrorMessage();
     });
   });
 
   it('Register with phone number less than 10 digits', { tags: ['@negative', '@validation'] }, () => {
     cy.get('@testData').then((data) => {
-      freeListing.enterPhoneNumber(data.invalidPhone3);
-      freeListing.verifyErrorMessage();
+      FreeListing.enterPhoneNumber(data.invalidPhone3);
+      FreeListing.verifyErrorMessage();
     });
   });
 
   it('Input Box Visibility', { tags: ['@GUI'] }, () => {
-    freeListing.inputboxVisible();
+    FreeListing.inputboxVisible();
   });
 
   it('Successful Registration For Valid Phone', { tags: ['@smoke', '@regression'] }, () => {
     cy.get('@testData').then((data) => {
-      freeListing.enterPhoneNumber(data.phonenumber);
+      FreeListing.enterPhoneNumber(data.phonenumber);
     });
-    freeListing.verifyOtpModalAppears();
+    FreeListing.verifyOtpModalAppears();
   });
 });
 

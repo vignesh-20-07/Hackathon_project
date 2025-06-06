@@ -1,4 +1,4 @@
-class fitnessSubMenu {
+class FitnessSubMenu {
 
     visit() {
         cy.visit('https://www.justdial.com');
@@ -36,4 +36,4 @@ class fitnessSubMenu {
 
 }
 
-export default new fitnessSubMenu();
+export default new FitnessSubMenu();
